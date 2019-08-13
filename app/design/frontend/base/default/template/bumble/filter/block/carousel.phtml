@@ -1,0 +1,250 @@
+<?php
+/*------------------------------------------------------------------------
+  * Bumble Extension Module 
+  * @package             SocialConnect
+  * @author              Lanzillo Ferdinando, Sabatino Francesco
+  * @copyright           Copyright (C) 2016 http://www.armah.it/armah-extension-en/ All Rights Reserved.
+  * @license             http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+  * @Technical-Support   http://www.armah.it/armah-extension-en/
+---------------------------------------------------------------------------*/
+?>
+<?php
+
+ $url= $_SERVER['HTTP_HOST'];
+
+ //RECUPERO DATI
+ $show_sett = Mage::getStoreConfig( 'bumble_filter/general_setting/show' );//[general_setting][fields][show]
+ $filter_group = Mage::getStoreConfig( 'bumble_filter/carousel_setting/filter_group' ); //filter_group
+ $slide_by = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_by' ); //slide_by
+ $use_owl_carousel = Mage::getStoreConfig( 'bumble_filter/carousel_setting/enable_owl_carousel' ); //enable_owl_carousel
+ $interval = Mage::getStoreConfig( 'bumble_filter/carousel_setting/interval' ); //interval
+ $autoplay = Mage::getStoreConfig( 'bumble_filter/carousel_setting/autoplay' );  //autoplay
+ $showarrow = Mage::getStoreConfig( 'bumble_filter/carousel_setting/showarrow' );  //showarrow
+ $slide_col = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_col' );  //slide_col
+ $show_dots = Mage::getStoreConfig( 'bumble_filter/carousel_setting/show_dots' );  //show_dots
+
+ //responsive 1024
+ $slide_by_resp_1024 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_by_resp_1024' ); //slide_by
+ $interval_resp_1024 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/interval_resp_1024' ); //interval
+ $autoplay_resp_1024 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/autoplay_resp_1024' );  //autoplay
+ $showarrow_resp_1024 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/showarrow_resp_1024' );  //showarrow
+ $slide_col_resp_1024 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_col_resp_1024' );  //slide_col
+ $show_dots_resp_1024 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/show_dots_resp_1024' );  //show_dots
+
+ //responsive 600
+ $slide_by_resp_600 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_by_resp_600' ); //slide_by
+ $interval_resp_600 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/interval_resp_600' ); //interval
+ $autoplay_resp_600 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/autoplay_resp_600' );  //autoplay
+ $showarrow_resp_600 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/showarrow_resp_600' );  //showarrow
+ $slide_col_resp_600 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_col_resp_600' );  //slide_col
+ $show_dots_resp_600 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/show_dots_resp_600' );  //show_dots
+
+ //responsive 480
+ $slide_by_resp_480 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_by_resp_480' ); //slide_by
+ $interval_resp_480 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/interval_resp_480' ); //interval
+ $autoplay_resp_480 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/autoplay_resp_480' );  //autoplay
+ $showarrow_resp_480 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/showarrow_resp_480' );  //showarrow
+ $slide_col_resp_480 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/slide_col_resp_480' );  //slide_col
+ $show_dots_resp_480 = Mage::getStoreConfig( 'bumble_filter/carousel_setting/show_dots_resp_480' );  //show_dots
+ 
+ if($showarrow == 0){
+    $showarrowp = 'false';
+ }else{
+    $showarrowp = 'true';
+ }
+
+ if($autoplay == 0){
+    $autoplay = 'false';
+ }else{
+    $autoplay = 'true';
+ }
+
+ if($show_dots == 0){
+    $show_dots = 'false';
+ }else{
+    $show_dots = 'true';
+ }
+
+//responsive 1024
+ if($showarrow_resp_1024 == 0){
+    $showarrowp_resp_1024 = 'false';
+ }else{
+    $showarrowp_resp_1024 = 'true';
+ }
+
+ if($autoplay_resp_1024 == 0){
+    $autoplay_resp_1024 = 'false';
+ }else{
+    $autoplay_resp_1024 = 'true';
+ }
+
+ if($show_dots_resp_1024 == 0){
+    $show_dots_resp_1024 = 'false';
+ }else{
+    $show_dots_resp_1024 = 'true';
+ }
+
+//responsive 600
+ if($showarrow_resp_600 == 0){
+    $showarrowp_resp_600 = 'false';
+ }else{
+    $showarrowp_resp_600 = 'true';
+ }
+
+ if($autoplay_resp_600 == 0){
+    $autoplay_resp_600 = 'false';
+ }else{
+    $autoplay_resp_600 = 'true';
+ }
+
+ if($show_dots_resp_600 == 0){
+    $show_dots_resp_600 = 'false';
+ }else{
+    $show_dots_resp_600 = 'true';
+ }
+
+//responsive 480
+ if($showarrow_resp_480 == 0){
+    $showarrowp_resp_480 = 'false';
+ }else{
+    $showarrowp_resp_480 = 'true';
+ }
+
+ if($autoplay_resp_480 == 0){
+    $autoplay_resp_480 = 'false';
+ }else{
+    $autoplay_resp_480 = 'true';
+ }
+
+ if($show_dots_resp_480 == 0){
+    $show_dots_resp_480 = 'false';
+ }else{
+    $show_dots_resp_480 = 'true';
+ }
+ ?>
+ <script>
+ 
+  jQuery(document).ready(function(){
+  jQuery('.bumble_carousel').slick({
+  infinite: true,
+  slidesToShow: <?php echo $slide_col ?>,
+  slidesToScroll: <?php echo $slide_by ?>,
+  autoplay: <?php echo $autoplay ?>,
+  autoplaySpeed: <?php echo $interval ?>,
+  dots:  <?php echo $show_dots ?>,
+  centerMode: true,
+  centerPadding:"10px",
+  arrows: <?php echo $showarrowp ?>,
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        infinite: true,
+        slidesToShow: <?php echo $slide_col_resp_1024 ?>,
+        slidesToScroll: <?php echo $slide_by_resp_1024 ?>,
+        autoplay: <?php echo $autoplay_resp_1024 ?>,
+        autoplaySpeed: <?php echo $interval_resp_1024 ?>,
+        dots:  <?php echo $show_dots_resp_1024 ?>,
+        centerMode: true,
+        centerPadding:"10px",
+        arrows: <?php echo $showarrowp_resp_1024 ?>,
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        infinite: true,
+        slidesToShow: <?php echo $slide_col_resp_600 ?>,
+        slidesToScroll: <?php echo $slide_by_resp_600 ?>,
+        autoplay: <?php echo $autoplay_resp_600 ?>,
+        autoplaySpeed: <?php echo $interval_resp_600 ?>,
+        dots:  <?php echo $show_dots_resp_600 ?>,
+        centerMode: true,
+        centerPadding:"10px",
+        arrows: <?php echo $showarrowp_resp_600 ?>,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        infinite: true,
+        slidesToShow: <?php echo $slide_col_resp_480 ?>,
+        slidesToScroll: <?php echo $slide_by_resp_480 ?>,
+        autoplay: <?php echo $autoplay_resp_480 ?>,
+        autoplaySpeed: <?php echo $interval_resp_480 ?>,
+        dots:  <?php echo $show_dots_resp_480 ?>,
+        centerMode: true,
+        centerPadding:"10px",
+        arrows: <?php echo $showarrowp_resp_480 ?>,
+      }
+    }
+   
+  ]
+  });
+});
+  
+    </script>
+<?php if ($show_sett == 1) : ?>
+<?php if ($use_owl_carousel == 1) : ?>
+<div class="bumble_carousel"> 
+<?php 
+$filter = Mage::getModel('bumble_filter/group')->getCollection(); ?>
+   <?php if($filter_group == 0 || $filter_group == "") : ?>
+   <?php foreach ($filter as $filters): ?>
+    
+    <?php    $res = $filters->getFile();
+        $title= $filters->getTitle();
+        $filterId= $filters->getFilterId();
+        $show= $filters->getStatus();
+        $groupIdentifier= Mage::getModel('bumble_filter/filter')->load($filterId)->getIdentifier();
+        $identi= $filters->getIdentifier();
+        $extension = '.html'; ?>
+       <?php if($show == 1) : ?>
+        
+        <div>
+            <a href="http://<?php echo $url ?>/<?php echo $groupIdentifier ?>/<?php echo $identi ?><?php echo $extension ?>"><img data-u="image" class="logo-carousel" src="media/<?php echo $res ?>" alt="<?php echo $filters->getTitle() ?>" />
+            </a>
+        </div>
+       <?php endif ?>
+
+    <?php endforeach ?>
+    <?php endif ?>
+    <?php if($filter_group != 0 || $filter_group != "") :  ?>
+    
+    <?php foreach ($filter as $filters) : ?>
+    
+    <?php
+        $res = $filters->getFile();
+        $title= $filters->getTitle();
+        $filterId= $filters->getFilterId();
+        $show= $filters->getStatus(); ?>
+       <?php if($filter_group == $filterId) : ?>
+       <?php $groupIdentifier= Mage::getModel('bumble_filter/filter')->load($filterId)->getIdentifier();
+        $identi= $filters->getIdentifier();
+        $extension = '.html'; ?>
+
+        <?php if($show == 1) : ?>
+        
+        <div>
+            <a href="http://<?php echo $url ?>/<?php echo $groupIdentifier ?>/<?php echo $identi ?><?php echo $extension ?>"><img data-u="image" class="logo-carousel" src="media/<?php echo $res ?>" alt="<?php echo $filters->getTitle() ?>" />
+            </a>
+        </div>
+        <?php endif ?>
+    <?php endif ?>
+
+    <?php endforeach ?>
+    <?php endif ?>
+
+    </div>
+        
+<?php endif; //end if $use ?>
+
+<?php endif; //end if $show_sett ?>
+    
+
+
+
+
+
+   

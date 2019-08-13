@@ -1,0 +1,29 @@
+<div class="block filternav-block">
+	<div class="block-title">
+		<strong><span><?php echo   $this->getConfig("filternav_title"); ?></span></strong>
+		<?php if( ($pretext = $this->getConfig("pretext")) && !$cms ) { ?>
+		<div class="pretext"><?php echo $pretext;?></div>
+		<?php } elseif(isset($cms) && $cms != '') {
+			?>
+			<div class="pretext"><?php echo $cms;?></div>
+			<?php
+		} ?>
+	</div>
+	<?php $filters = Mage::getModel('bumble_filter/filter')->getCollection() ?>
+	<div class="block-content">
+		<?php if( !$this->getConfig("isdropdown") ): ?>
+			<ul>
+				<?php foreach( $filters as $filter ): ?>
+					<li><a href="<?php echo $filter->getLink();?>" title="<?php echo $filter->getTitle();?>"><span><?php echo $filter->getTitle();?></span></a></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php else: ?>
+			<select name="select-filter-nav" onchange="window.location.href=this.value">
+				<option value=""><?php echo $this->__("-----------");?></option>
+				<?php foreach( $filters as $filter ): ?>
+					<option value="<?php echo $filter->getLink();?>"><?php echo $filter->getTitle();?></option>
+				<?php endforeach; ?>
+			</select>
+		<?php endif; ?>
+	</div>
+</div>

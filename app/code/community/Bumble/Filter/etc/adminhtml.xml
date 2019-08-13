@@ -1,0 +1,100 @@
+<?xml version="1.0"?> 
+<config>
+    <menu>
+            <bumbleextensions module="bumble_filter">
+                <title>Bumble Extension</title>
+                <sort_order>50</sort_order>
+                <children>
+                    <filter translate="title" module="bumble_filter">
+                        <title>Bumble Setting</title>
+                        <children>
+                            
+                            <filtergroup translate="title" module="bumble_filter">
+                                <title>Configuration Groups</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/filtergroup/index</action>
+                            </filtergroup>
+                            <add module="bumble_filter">
+                                <title>Add Group</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/filter/add</action>
+                            </add>
+                            <filters module="bumble_filter">
+                                <title>Manage Groups</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/filter/index</action>
+                            </filters>
+                            
+                         
+                            <configuration translate="title" module="bumble_filter">
+                                <title>Bumble System</title>
+                                <sort_order>5</sort_order>
+                                <action>adminhtml/system_config/edit/section/bumble_filter</action>
+                            </configuration>
+                        </children>
+                    </filter>
+                </children>
+            </bumbleextensions>
+    </menu>
+    <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <bumbleextensions module="bumble_filter">
+                            <title>Bumble Extension</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <filter translate="title" module="bumble_filter">
+                                    <title>Bumble Setting</title>
+                                    <children>
+                                        
+                                        <filtergroup translate="title" module="bumble_filter">
+                                            <title>Configurazione Grouppi</title>
+                                            <sort_order>1</sort_order>
+
+                                        </filtergroup>
+                                        <add module="bumble_filter">
+                                            <title>Aggiungi Grouppo</title>
+                                            <sort_order>2</sort_order>
+    
+                                        </add>
+                                        <filters module="bumble_filter">
+                                            <title>Manage Grouppi</title>
+                                            <sort_order>3</sort_order>
+               
+                                        </filters>
+                                        
+                                        <configuration translate="title" module="bumble_filter">
+                                            <title>Setting</title>
+                                            <sort_order>5</sort_order>
+                         
+                                        </configuration>
+                                    </children>
+                                </filter>
+                            </children>
+                        </bumbleextensions>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <bumble_filter>
+                                            <title>Bumble Filter</title>
+                                        </bumble_filter>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+			<modules>
+				<Bumble_Filter>
+					<files>
+						<default>Bumble_Filter.csv</default>
+					</files>
+				</Bumble_Filter>
+			</modules>
+		</translate>
+</config>

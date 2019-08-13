@@ -1,0 +1,228 @@
+<?php 
+ /*------------------------------------------------------------------------
+  * Bumble Extension Module 
+  * @package             SocialConnect
+  * @author              Lanzillo Ferdinando, Sabatino Francesco
+  * @copyright           Copyright (C) 2016 http://www.armah.it/armah-extension-en/ All Rights Reserved.
+  * @license             http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+  * @Technical-Support   http://www.armah.it/armah-extension-en/
+--------------------------------------------------------------------------*/
+?>
+
+<?php $show = Mage::getStoreConfig( 'bumble_filter/general_setting/show' ); ?>
+<?php if($show == 0): ?>
+	<p class="note-msg">Non é possibile visualizzare i Gruppi.<br />
+	Controllare in <i>Bumble Setting > General Setting > Enable</i> sia impostato su SI</p>
+<?php endif ?>
+		
+<?php 
+	$max_col_ls = Mage::getStoreConfig( 'bumble_filter/general_setting/grid_col_ls' );
+	$max_col_ms = Mage::getStoreConfig( 'bumble_filter/general_setting/grid_col_ms' );
+	$max_col_ss = Mage::getStoreConfig( 'bumble_filter/general_setting/grid_col_ss' );
+	$max_col_mss = Mage::getStoreConfig( 'bumble_filter/general_setting/grid_col_mss' );
+?>
+
+<?php if($show == 1) : ?>
+<?php
+
+$c = Mage::getStoreConfig( 'bumble_filter/general_setting/filter_imagesize' );
+if (strpos($c, 'x') !== false) {
+    
+    $tmp = explode( "x", $c );
+						
+	$width = (int)$tmp[0];
+	$height = (int)$tmp[1];
+
+	if($width == 0 )
+	{
+		$width= '100%';
+	}
+	
+	if($height == 0)
+	{
+		$height= '';
+	}
+}
+else
+{
+	$width= '';
+	$height= '';
+}
+
+
+
+$urlhost= $_SERVER['HTTP_HOST'];
+
+
+        		
+
+$layout_mode = $this->getLayoutMode();
+if("grid" == $layout_mode) { 
+	 
+	//ls
+	if($max_col_ls != "")
+	{
+		$cla_ls = "filt-columnls";
+		$split_col_ls = round(100/$max_col_ls, 2)."%";
+	}else
+	{
+		$cla_ls = "filt-columnls";
+		$split_col_ls= "auto";
+	}
+	//ms
+	if($max_col_ms != "")
+	{
+		$cla_ms = "filt-columnms";
+		$split_col_ms = round(100/$max_col_ms, 2)."%";
+	}else
+	{
+		$cla_ms = "filt-columnms";
+		$split_col_ms= "auto";
+	}
+	//ss
+	if($max_col_ss != "")
+	{
+		$cla_ss = "filt-columnss";
+		$split_col_ss = round(100/$max_col_ss, 2)."%";
+	}else
+	{
+		$cla_ss = "filt-columnss";
+		$split_col_ss= "auto";
+	}
+	//mss
+	if($max_col_mss != "")
+	{
+		$cla_mss = "filt-columnmss";
+		$split_col_mss = round(100/$max_col_mss, 2)."%";
+	}else
+	{
+		$cla_mss = "filt-columnmss";
+		$split_col_mss= "auto";
+	}
+?>
+
+	<style>
+
+		
+  
+			.filt-columnls-<?php echo $max_col_ls; ?> {
+				float: left;
+				<?php if ($max_col_ls != "") {?>width: <?php echo $split_col_ls; ?> !important;<?php } ?>
+			}
+			
+		
+		@media screen and (max-width: 1024px) {
+			.filt-columnms-<?php echo $max_col_ms; ?> {
+				float: left;
+				<?php if ($max_col_ms != "") {?>width: <?php echo $split_col_ms; ?> !important;<?php } ?>
+			}
+		}
+		@media screen and (max-width: 600px) {
+			.filt-columnss-<?php echo $max_col_ss; ?> {
+				float: left;
+				<?php if ($max_col_ss != "") {?>width: <?php echo $split_col_ss; ?> !important;<?php } ?>
+			}
+		}
+		@media screen and (max-width: 480px) {
+			.filt-columnmss-<?php echo $max_col_mss; ?> {
+				float: left;
+				<?php if ($max_col_mss != "") {?>width: <?php echo $split_col_mss; ?> !important;<?php } ?>
+			}
+			
+		}
+
+		
+	</style>
+
+<?php }else{ $cla = ""; }
+if("list" == $layout_mode ) {
+	$span_large = $span_medium = $span_small = $span_mini = 12;
+	$list = "margin: 0 auto;";
+}
+?>
+<div class="bumble-filterlist-page block">
+	<div class="block-title">
+		<h1><?php echo $this->__($this->_getTitleCurrentGroup())?></h1>
+	</div>
+	<div class="block-content">
+		<?php
+		$url= $_SERVER['HTTP_HOST'];
+         $url2 = $_SERVER["REQUEST_URI"];
+         $route= str_replace($url, '', $url2);
+         $route = str_replace('en/', '', $route);
+         $route= str_replace('/', '', $route);
+         $baseUrl = Mage::app()->getStore($storeId)->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK);
+         #var_dump($route);
+
+        $bra= array();
+		$resource = Mage::getSingleton('core/resource');
+        		$readConnection = $resource->getConnection('core_read');
+        			//first query
+        		$query = "SELECT `filter_id` FROM  bumble_filter_filter WHERE `identifier`= '$route'";
+
+        		$results = $readConnection->fetchAll($query);
+        		$id = $results[0]['filter_id'];
+        		$query = "SELECT `filter_id` FROM  bumble_filter_group WHERE `filter_id`= '$id'";
+
+        		$results = $readConnection->fetchAll($query);
+
+        		$lungh_ids = count($results);
+        		//var_dump($results);
+        		//$id = $results[0]['filter_id'];
+		$filters = Mage::getModel('bumble_filter/group')->getCollection();
+		
+		$_collectionSize = count($filters);
+		$_columnCount = !empty($grid_col_ls)?$grid_col_ls:$_collectionSize;
+		foreach( $filters as $filter ): ?>
+		<?php $bra[]= $filter  ?>
+		<?php endforeach ?>
+		<?php $lunghezzaArray= count($bra); ?>
+		<?php if($lunghezzaArray == 1):  ?>
+		<?php $head = 'http://'.$url.'/'.$route.'/'.$bra[0]['identifier'].'.html';
+		header('Location: '.$head);
+		die();
+		?>
+		<?php endif ?>
+		
+
+		<?php $i =$max_col;$j=0; ?>
+		<?php // echo $i;?>
+		<div class="filters-row">
+		<?php foreach( $filters as $filter ): ?>
+		<?php $bra_id = $filter->getFilterId(); ?>
+		<?php if($i == 0){ $i = $max_col; } ?>
+		<?php $show= $filter->getStatus(); ?>
+		<?php if($bra_id == $id) : ?>
+		<?php if($show == 1) : ?>
+		
+		 
+		
+			<div class="<?php if ("grid" == $layout_mode) { echo $cla_ls.'-'.$max_col_ls;} ?> <?php if ("grid" == $layout_mode) { echo $cla_ms.'-'.$max_col_ms;} ?> <?php if ("grid" == $layout_mode) { echo $cla_ss.'-'.$max_col_ss;} ?> <?php if ("grid" == $layout_mode) { echo $cla_mss.'-'.$max_col_mss;} ?> filter-col <?php if($layout_mode =='list'){ echo "col-fullwidth";} ?>" >
+			
+				<div class="filter-item">
+				<a class="filter-logo" href="<?php echo $baseUrl ?><?php echo $route; ?>/<?php echo $filter->getIdentifier(); ?>.html" title="<?php echo $filter->getTitle();?>">
+					<img src="http://<?php echo $urlhost; ?>/media/<?php echo $filter->getFile();?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" style="<?php echo $list; ?>" alt="<?php echo $filter->getTitle();?>" />
+				</a>
+				<a class="filter-title" href="<?php echo $baseUrl; ?><?php echo $route; ?>/<?php echo $filter->getIdentifier(); ?>.html" title="<?php echo $filter->getTitle();?>">
+					<span><?php echo $filter->getTitle();?></span>
+				</a>
+				</div>
+
+			</div>
+		
+		<?php endif ?>
+		<?php endif ?>
+		<?php $i--; ?>		
+		<?php //echo $i;  ?>
+		<?php endforeach; ?>
+		</div>
+		<?php //echo $lungh_ids; echo $i; echo $max_col; ?>
+
+		
+		</div>
+		
+	</div>
+	<?php echo $this->getChildHtml('filter.list.toolbar'); ?>
+
+<?php endif ?>
+<div style="clear:both;"></div>

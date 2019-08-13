@@ -1,0 +1,18 @@
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:90%;"><h3 class="icon-head head-filter"><?php echo Mage::helper('bumble_filter')->__(' List Group Filter') ?></h3></td>
+        <td class="a-right">
+            <?php  echo $this->getAddNewButtonHtml() ?>
+        </td>
+		<td class="a-right">
+            <?php echo $this->getMassRewriteCatButtonHtml() ?>
+        </td>
+		
+    </tr>
+</table>
+</div>
+<?php  echo $this->getStoreSwitcherHtml() ?>
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>

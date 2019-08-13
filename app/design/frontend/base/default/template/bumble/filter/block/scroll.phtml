@@ -1,0 +1,99 @@
+<?php
+$itemsperpage = (int)$this->getConfig("max_items") ;
+$itemsperpage = !empty($itemsperpage)?$itemsperpage:6;
+$columns = (int)$this->getConfig("columns");
+$columns = !empty($columns)?$columns:6;
+
+$c = $this->getGeneralConfig( 'filter_imagesize', "" );
+$tmp = explode( "x", $c );
+$thumb_width = $thumb_height = "";
+if( count($tmp) > 0 && (int)$tmp[0] ){
+	$thumb_width = (int)$tmp[0];
+	$thumb_height = (int)$tmp[1];
+}
+$id = rand(1,100).rand(1,time()); 
+$span =  12/$columns;
+$total = count($filters);
+$i = 1;
+$x = 0;
+$title =  $this->getConfig("scrollmod_title");
+
+?>
+<div id="bumble-filtercarousel-<?php echo $id?>" class="block bumble-filtercarousel">
+	<?php if($title) { ?>
+	<div class="block-title">
+		<strong>
+			<span>
+				<?php echo $title; ?>
+			</span>
+		</strong>
+		<?php if( ($pretext = $this->getConfig("pretext")) && !$cms ) { ?>
+		<div class="pretext"><?php echo $pretext;?></div>
+		<?php } elseif(isset($cms) && $cms != '') {
+			?>
+			<div class="pretext"><?php echo $cms;?></div>
+			<?php
+		} ?>
+	</div>
+	<?php } ?>
+	<div class="block-content">
+		<div id="bumblefiltercarousel-<?php echo $id;?>" class="carousel slide bumblecarousel hidden-xs">
+			<div class="carousel-inner">
+				<?php if($filters) { ?>
+				<?php foreach ($filters as  $filter) {?>
+
+				<?php if( $itemsperpage == 1 || $i % $itemsperpage == 1){ ?>
+					<div class="item <?php if($i==1) {?>first<?php }elseif( ($i+$itemsperpage) >= $total ) {?>last<?php } ?> <?php if($i==1) {?>active<?php } ?>">
+				<?php } ?>
+
+					<?php if( $columns == 1 || $x%$columns == 0 || $x%$itemsperpage == 0){ ?>
+  						<div class="row">
+   					<?php } ?>
+
+							<div class="col-lg-<?php echo $span;?> col-xs-6 col-sm-2">
+								<div class="item-inner">
+									<?php $filter_link = $filter->getLink(); ?>
+									<?php
+									$image = "";
+									if($thumb_width && $thumb_height) {
+										$image = Mage::helper('bumble_filter')->resize($filter->getFile(), $thumb_width, $thumb_height);
+									} else {
+										$image = $filter->getImageUrl("l");
+									}
+									?>
+									<?php if ($filter_link) { ?>
+									<a href="<?php echo $filter_link; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $filter->getTitle(); ?>" class="img-responsive" /></a>
+									<?php } else { ?>
+									<img src="<?php echo $image; ?>" alt="<?php echo $filter->getTitle(); ?>" class="img-responsive" />
+									<?php } ?>
+								</div>
+							</div>
+
+					<?php if( $columns == 1 || ($x+1)%$columns == 0 || $i == $total || ($x>0 && ($x+1)%$itemsperpage == 0) ) {  ?>
+  						</div>
+  					<?php } ?>
+  					
+					<?php if( $itemsperpage == 1 || ($i+1)%$itemsperpage == 1 || $i == $total ) { $x = -1; ?>
+  						</div>
+  					<?php } ?>
+
+				<?php $i++;$x++; }  ?>
+			</div>
+			<?php } //end if?>
+			<?php if( (int)$total > $columns ){ ?>
+			<div class="carousel-controls">
+				<a class="carousel-control left fa fa-angle-left" href="#bumblefiltercarousel<?php echo $id;?>" data-slide="prev"></a>
+				<a class="carousel-control right fa fa-angle-right" href="#bumblefiltercarousel<?php echo $id;?>" data-slide="next"></a>
+			</div>
+			<?php } ?>
+			<?php  if ($this->getConfig("show_more")) { ?>
+			<div class="filter-showmore"><a class="btn btn-info" role="button" href="<?php echo $this->getMoreViewLink(); ?>">Show More Filter</a></div>
+			<?php } ?>
+		</div> <!--end bumblefiltercarousel -->
+	</div> <!--end block-content -->
+</div> <!--end bumble-filtercarousel -->
+<?php if( (int)$total > 1 ){ ?>
+<script type="text/javascript"><!--
+	jQuery('#bumblefiltercarousel-<?php echo $id;?>').carousel({interval:false});
+--></script>
+<?php } ?>

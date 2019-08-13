@@ -1,0 +1,81 @@
+.parent a{
+    color: #636363;
+    margin-left: 5px;
+}
+.parent a:hover {
+    text-decoration: none;
+    margin-left: 10px;
+}
+.bumble-filterlist-page .filter-logo {
+    float: none;
+    margin-bottom: 5px;
+    min-height: 80px;
+    display: block;
+}
+
+.bumble-filterlist-page .filter-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+.filter-item {
+    text-align: center !important;
+}
+        
+a.filter-logo img {
+    margin: 0 auto !important;
+}
+.bumble-filterlist-page li,.bumble-filterlist-page .filter-item{
+    min-height: 130px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    padding: 8px;
+    margin: 5px;
+}
+.bumble-pres h1{
+    
+}
+.filter-description {
+    float: left;
+}
+.filter-product.bumbleclear {
+    position: relative;
+    top: 15px;
+}
+.bumbleclear {
+    clear: both;
+}
+.filter-image{
+    position: relative;
+    bottom: 20px;
+    float: right;
+    width: auto;
+    height: auto;
+}
+.filters-row {
+    float: left;
+    width: 100%;
+}
+.column {
+    float: left;
+    width: auto; 
+}
+.bumble-filterlist-page .layout-grid li, .bumble-filterlist-page .layout-grid .filter-item{
+	float: left;
+}
+.bumble-filterlist-page .pager .pages {display: block; margin-left: 10px	;}
+
+.bumble-filter-menu li {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.bumble-filter-menu li:first-child {
+    border: medium none;
+}
+.filter-showmore{
+    text-align: center;
+    margin: 10px 0px;
+}
+.filter-submit{
+    text-align: right;
+    margin: 10px;
+}

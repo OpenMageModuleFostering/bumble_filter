@@ -1,0 +1,500 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<bumble translate="label" module="bumble_filter">
+			<label><![CDATA[<div style="position: absolute;"><img id="magepal_block" src="" alt="" border="0" /></div>&nbsp;<script>$('magepal_block').src = "/skin/adminhtml/default/default/images/bumble/bumble.png";</script>]]></label>
+			<sort_order>211</sort_order>
+		</bumble>
+	</tabs>
+	<sections>
+		<bumble_filter>
+			<label>Bumble Extension</label>
+			<tab>bumble</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>	
+
+				
+				<general_setting translate="label">
+					<label>General Setting</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1000</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						
+						<show translate="label" module="core">
+							<label>Enabled</label>
+							<sort_order>10</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>bumble_filter/system_config_backend_filter_cache</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show>
+						<listing_layout translate="label">
+							<label>Layout Of Groups List Page</label>
+							<frontend_type>select</frontend_type>
+							<source_model>bumble_filter/system_config_source_listLayouts</source_model>
+							<sort_order>25</sort_order>
+							<comment>Choose how show the List Page</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</listing_layout>
+						<list_limit translate="label">
+							<label>Limit Items On Listing Page</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+							<comment>Limit Items Show On Groups Listing Page</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</list_limit>
+						<spacer_1 translate="label">
+                            <label>CONFIG FOR GRID LAYOUT</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>bumble_filter/system_config_form_field_spacer</frontend_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </spacer_1>
+                        <grid_col_ls translate="label" module="core">
+                            <label>Columns in Large Screen</label>
+                            <comment>Choose Number column will show in grid mode</comment>
+                            <sort_order>45</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bumble_filter/system_config_source_listcolumns</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_col_ls>
+                        <grid_col_ms translate="label" module="core">
+                            <label>Columns In Medium Screen</label>
+                            <comment>Choose Number column will show in grid mode</comment>
+                            <sort_order>55</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bumble_filter/system_config_source_listcolumns</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_col_ms>
+                        <grid_col_ss translate="label" module="core">
+                            <label>Columns In Small Screen</label>
+                            <comment>Choose Number column will show in grid mode</comment>
+                            <sort_order>65</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bumble_filter/system_config_source_listcolumns</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_col_ss>
+                        <grid_col_mss translate="label" module="core">
+                            <label>Columns In Mini Small Screen</label>
+                            <comment>Choose Number column will show in grid mode</comment>
+                            <sort_order>75</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <source_model>bumble_filter/system_config_source_listcolumns</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_col_mss>
+						<spacer_2 translate="label">
+							<label>Set Width and Height for Images</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_spacer</frontend_model>
+							<sort_order>85</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</spacer_2> 
+						<filter_imagesize translate="label">
+							<label>Image Size, it is used in Group list</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>95</sort_order>
+							<comment>Formart WidthxHeight, for example: 600x250 o Auto for basic formart</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</filter_imagesize>
+						<prod_imagesize translate="label">
+							<label>Image Size, it is used in Product list</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>97</sort_order>
+							<comment>Formart WidthxHeight, for example: 600x250 o Auto for basic formart</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</prod_imagesize>
+					</fields>
+				</general_setting>
+				<module_setting>
+					<label>Modules Setting</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2003</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+
+						<filter_group translate="label" module="core">
+							<label>Filter by Group</label>
+							<sort_order>104</sort_order>
+							<frontend_type>multiselect</frontend_type>
+							<source_model>bumble_filter/system_config_source_listGroup</source_model>
+							<comment>Choose Group/s to show on Navigator</comment>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</filter_group>
+
+						<spacer_1000 translate="label">
+							<label>Group Navigator Module</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_spacer</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</spacer_1000> 
+						<enable_filternavmodule translate="label" module="core">
+							<label>Enable Navigator Module</label>
+							<sort_order>102</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_filternavmodule>
+						<filternav_title translate="label" module="core">
+							<label>Group Navigator Title</label>
+							<sort_order>103</sort_order>
+							<frontend_type>text</frontend_type>
+							
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</filternav_title>
+						
+					</fields>
+					
+				</module_setting>
+				<carousel_setting>
+					<label>Owl Carousel Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5555</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable_owl_carousel>
+							<label>Use OWL Carousel</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_owl_carousel>
+
+						<filter_group>
+							<label>Filter by Group</label>
+							<frontend_type>select</frontend_type>
+							<source_model>bumble_filter/system_config_source_listGroup</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</filter_group>
+						<slide_col>
+							<label>Columns show</label>
+							<frontend_type>text</frontend_type>
+							<comment>Columns to show on frontend. Default: 3 columns</comment>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_col>
+						<slide_by>
+							<label>Slide By</label>
+							<frontend_type>text</frontend_type>
+							<comment>Number Items will slide on a time. Default: 1</comment>
+							<sort_order>62</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_by>
+						<showarrow>
+							<label>Show Arrow</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>65</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</showarrow>
+						
+						<autoplay>
+							<label>Autoplay</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</autoplay>
+						<interval>
+							<label>Speed</label>
+							<comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>75</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</interval>
+						<show_dots>
+							<label>Show Dots indicators</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_dots>
+						<!-- Responsive 1024 -->
+						<label_resp_1024>
+							<label>Carousel Responsive 1024</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_responsive1024</frontend_model>
+							<sort_order>82</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</label_resp_1024>
+						<slide_col_resp_1024>
+							<label>Columns show</label>
+							<frontend_type>text</frontend_type>
+							<comment>Columns to show on frontend. Default: 3 columns</comment>
+							<sort_order>85</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_col_resp_1024>
+						<slide_by_resp_1024>
+							<label>Slide By</label>
+							<frontend_type>text</frontend_type>
+							<comment>Number Items will slide on a time. Default: 1</comment>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_by_resp_1024>
+						<showarrow_resp_1024>
+							<label>Show Arrow</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>95</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</showarrow_resp_1024>
+						
+						<autoplay_resp_1024>
+							<label>Autoplay</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</autoplay_resp_1024>
+						<interval_resp_1024>
+							<label>Speed</label>
+							<comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>110</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</interval_resp_1024>
+						<show_dots_resp_1024>
+							<label>Show Dots indicators</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>120</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_dots_resp_1024>
+						<!-- Responsive 600 -->
+						<label_resp_600>
+							<label>Carousel Responsive 600</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_responsive600</frontend_model>
+							<sort_order>125</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</label_resp_600>
+						<slide_col_resp_600>
+							<label>Columns show</label>
+							<frontend_type>text</frontend_type>
+							<comment>Columns to show on frontend. Default: 3 columns</comment>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_col_resp_600>
+						<slide_by_resp_600>
+							<label>Slide By</label>
+							<frontend_type>text</frontend_type>
+							<comment>Number Items will slide on a time. Default: 1</comment>
+							<sort_order>140</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_by_resp_600>
+						<showarrow_resp_600>
+							<label>Show Arrow</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>150</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</showarrow_resp_600>
+						
+						<autoplay_resp_600>
+							<label>Autoplay</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>160</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</autoplay_resp_600>
+						<interval_resp_600>
+							<label>Speed</label>
+							<comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>170</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</interval_resp_600>
+						<show_dots_resp_600>
+							<label>Show Dots indicators</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>180</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_dots_resp_600>
+						<!-- Responsive 480 -->
+						<label_resp_480>
+							<label>Carousel Responsive 480</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_responsive480</frontend_model>
+							<sort_order>185</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</label_resp_480>
+						<slide_col_resp_480>
+							<label>Columns show</label>
+							<frontend_type>text</frontend_type>
+							<comment>Columns to show on frontend. Default: 3 columns</comment>
+							<sort_order>190</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_col_resp_480>
+						<slide_by_resp_480>
+							<label>Slide By</label>
+							<frontend_type>text</frontend_type>
+							<comment>Number Items will slide on a time. Default: 1</comment>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</slide_by_resp_480>
+						<showarrow_resp_480>
+							<label>Show Arrow</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>210</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</showarrow_resp_480>
+						
+						<autoplay_resp_480>
+							<label>Autoplay</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>220</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</autoplay_resp_480>
+						<interval_resp_480>
+							<label>Speed</label>
+							<comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>230</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</interval_resp_480>
+						<show_dots_resp_480>
+							<label>Show Dots indicators</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>240</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_dots_resp_480>
+					</fields>
+				</carousel_setting>	
+				<!-- Information -->
+				<advanded_parameter>
+					<label>Information - Support</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>6003</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields> 
+						<help_code translate="label">
+							<label>Set Module Visable On Pages, Position</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_helpcode</frontend_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</help_code>
+						<module_information translate="label">
+							<label>Set Module Visable On Pages, Position</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>bumble_filter/system_config_form_field_information</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</module_information> 
+
+					</fields>
+				</advanded_parameter>	
+			</groups>
+		</bumble_filter>
+	</sections>    
+</config>

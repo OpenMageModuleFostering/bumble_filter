@@ -1,0 +1,170 @@
+
+<?php
+  $url= $_SERVER['HTTP_HOST'];
+
+  $imga03 = 'http://'.$url.'/skin/frontend/base/default/bumble_filter/images/a03.png';
+  $imgb03 = 'http://'.$url.'/skin/frontend/base/default/bumble_filter/images/b03.png';
+  $imgload = 'http://'.$url.'/skin/frontend/base/default/bumble_filter/images/loading.gif';
+
+    $conf_show = Mage::getStoreConfig( "bumble_filter/carousel_setting/enable_owl_carousel");
+    $conf_showc = Mage::getStoreConfig( "bumble_filter/widget_filter_scroll/use_owl_carousel");
+    
+    $conf_slide = Mage::getStoreConfig( "bumble_filter/carousel_setting/slide_by");
+    $conf_speed = Mage::getStoreConfig( "bumble_filter/carousel_setting/interval");
+
+  $enable_cache = $this->getConfig("enable_cache", 1 )
+?>
+
+
+    <!-- use jssor.slider.debug.js instead for debug -->
+    <script>
+        jssor_1_slider_init = function() {
+            
+            var jssor_1_options = {
+              $AutoPlay: true,
+              $AutoPlaySteps: <?php echo $conf_slide; ?>,
+              $SlideDuration: 210,
+              $AutoPlayInterval:<?php echo $conf_speed; ?>,
+              $SlideWidth: 200,
+              $SlideSpacing: 65,
+              $Cols: 4,
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$,
+                $Steps: <?php echo $conf_slide; ?>
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$,
+                $SpacingX: 1,
+                $SpacingY: 1
+              }
+            };
+            
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+            
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizing
+            function ScaleSlider() {
+                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, refSize);
+                    jssor_1_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            //responsive code end
+        };
+    </script>
+
+    <style>
+        
+        /* jssor slider bullet navigator skin 03 css */
+        /*
+        .jssorb03 div           (normal)
+        .jssorb03 div:hover     (normal mouseover)
+        .jssorb03 .av           (active)
+        .jssorb03 .av:hover     (active mouseover)
+        .jssorb03 .dn           (mousedown)
+        */
+        .jssorb03 {
+            position: absolute;
+        }
+        .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av {
+            position: absolute;
+            /* size of bullet elment */
+            width: 21px;
+            height: 21px;
+            text-align: center;
+            line-height: 21px;
+            color: black;
+            font-size: 12px;
+            background: url(<?php echo $imgb03; ?>) no-repeat;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .jssorb03 div { background-position: -5px -4px; }
+        .jssorb03 div:hover, .jssorb03 .av:hover { background-position: -35px -4px; }
+        .jssorb03 .av { background-position: -65px -4px; }
+        .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -4px; }
+
+        /* jssor slider arrow navigator skin 03 css */
+        /*
+        .jssora03l                  (normal)
+        .jssora03r                  (normal)
+        .jssora03l:hover            (normal mouseover)
+        .jssora03r:hover            (normal mouseover)
+        .jssora03l.jssora03ldn      (mousedown)
+        .jssora03r.jssora03rdn      (mousedown)
+        */
+        .jssora03l, .jssora03r {
+            display: block;
+            position: absolute;
+            /* size of arrow element */
+            width: 55px;
+            height: 55px;
+            cursor: pointer;
+            background: url(<?php echo $imga03; ?>) no-repeat;
+            overflow: hidden;
+        }
+        .jssora03l { background-position: -3px -33px; }
+        .jssora03r { background-position: -63px -33px; }
+        .jssora03l:hover { background-position: -123px -33px; }
+        .jssora03r:hover { background-position: -183px -33px; }
+        .jssora03l.jssora03ldn { background-position: -243px -33px; }
+        .jssora03r.jssora03rdn { background-position: -303px -33px; }
+    </style>
+    <?php if($conf_show == 1) : ?>
+    <h2 class="title-block"> All Filters </h2>
+    <div class="shadow">
+    <img src="media/wysiwyg/hsmimage/after_shadow.png" alt="">
+  </div>
+  <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; height: 190px; overflow: hidden; visibility: hidden;">
+        <!-- Loading Screen -->
+    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+        <div style="position:absolute;display:block;background:url(<?php echo $imgload; ?>) no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+        </div>
+        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1200px; height: 150px; overflow: hidden;">
+<?php
+    $filter = Mage::getModel('bumble_filter/group')->getCollection();
+    
+    foreach ($filter as $filters) 
+    {
+        $res = $filters->getFile();
+        $title= $filters->getTitle();
+        $filterId= $filters->getFilterId();
+        $groupIdentifier= Mage::getModel('bumble_filter/filter')->load($filterId)->getIdentifier();
+        $identi= $filters->getIdentifier();
+        $extension = '.html';
+   
+     ?>
+        
+        <div style="display: none;">
+            <a href="http://<?php echo $url;?>/<?php echo $groupIdentifier;?>/<?php echo $identi;?><?php echo $extension;?>"><img data-u="image" class="logo-carousel" src="media/<?php echo $res;?>" alt="<?php echo $filters->getTitle();?>" />
+            </a>
+        </div>
+           
+    <?php  }  ?>
+
+        
+        </div>
+        <!-- Bullet Navigator -->
+        <div data-u="navigator" class="jssorb03" style="bottom:10px;right:10px;">
+            <!-- bullet navigator item prototype -->
+            <div data-u="prototype" style="width:21px;height:21px;">
+                <div data-u="numbertemplate"></div>
+            </div>
+        </div>
+        <!-- Arrow Navigator -->
+        <span data-u="arrowleft" class="jssora03l" style="top:0px;bottom: 10px;left:8px;width:55px;height:55px;" data-autocenter="2"></span>
+        <span data-u="arrowright" class="jssora03r" style="top:0px;bottom: 10px;right:8px;width:55px;height:55px;" data-autocenter="2"></span>
+    </div>
+    <script>
+        jssor_1_slider_init();
+    </script>
+<?php endif ?>

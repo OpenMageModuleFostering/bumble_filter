@@ -1,0 +1,10 @@
+<?php $_product = $this->getProduct();
+	$id = $_product->getBumblefilter();
+?>
+<?php if( $id && Mage::getStoreConfig( "bumble_filter/general_setting/enable_icon" ) && Mage::getStoreConfig( "bumble_filter/general_setting/show" ) ): $filter =  $this->helper('bumble_filter/data')->getFilterById($id); ?>
+<div class="product-filter" style="clear:both">
+	<strong><?php echo $this->__("Filter");?></strong> <a href="<?php echo $filter->getLink();?>" title="<?php echo $filter->getTitle();?>">
+		<img src="<?php echo $filter->getIconUrl();?>" alt="<?php echo $filter->getTitle();?>"/>
+	</a>
+</div>
+<?php endif; ?>

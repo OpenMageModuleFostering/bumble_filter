@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<widgets>
+    
+<!-- Widget scroll filters-->
+<widget_filter_scroll type="bumble_filter/widget_carousel">
+    <name>Bumble Carousel</name>
+    <description>Create a Carousel Of your Group/s</description>
+    <parameters>
+        <spacer_1 translate="label">
+          <label>General Setting</label>
+          <type>bumble_filter/system_config_form_field_heading</type>
+          <sort_order>1</sort_order>
+          <visible>1</visible>
+          <description></description>
+        </spacer_1>
+
+        <filter_group translate="label" module="core">
+          <label>Filter Group</label>
+          <sort_order>2</sort_order>
+          <type>select</type>
+          <source_model>bumble_filter/system_config_source_listGroup</source_model>
+          <description>Choose Group to show on frontend.</description>
+          <visible>1</visible>
+        </filter_group>
+
+        <slide_by>
+          <label>Slide By</label>
+          <type>text</type>
+          <description>Number Items will slide on a time. Default: 1</description>
+          <sort_order>3</sort_order>
+          <visible>1</visible>
+          <value>1</value>
+        </slide_by>
+
+        <slide_col>
+          <label>Columns show</label>
+          <type>text</type>
+          <description>Width of each slide. Set field without unit px. Default: 245px</description>
+          <sort_order>4</sort_order>
+          <visible>1</visible>
+          <value>3</value>
+        </slide_col>
+
+        <autoplay>
+          <label>Autoplay</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>5</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </autoplay>
+
+        <showarrow>
+          <visible>1</visible>
+          <label>Show Arrow</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>6</sort_order>
+        <value>true</value>
+        </showarrow>
+
+        <show_dots>
+          <label>Show Dots indicators</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>6</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </show_dots>
+
+        <interval>
+          <visible>1</visible>
+          <label>Speed</label>
+          <comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+          <type>text</type>
+          <sort_order>7</sort_order>
+          <value>4000</value>
+        </interval>
+
+
+        <!-- Responsive 1024 -->
+        <spacer_2 translate="label">
+          <label>General Setting</label>
+          <type>bumble_filter/system_config_form_field_responsive1024</type>
+          <sort_order>8</sort_order>
+          <visible>1</visible>
+          <description></description>
+        </spacer_2>
+
+        <slide_by_resp_1024>
+          <label>Slide By</label>
+          <type>text</type>
+          <description>Number Items will slide on a time. Default: 1</description>
+          <sort_order>9</sort_order>
+          <visible>1</visible>
+          <value>1</value>
+        </slide_by_resp_1024>
+
+        <slide_col_resp_1024>
+          <label>Columns show</label>
+          <type>text</type>
+          <description>Width of each slide. Set field without unit px. Default: 245px</description>
+          <sort_order>10</sort_order>
+          <visible>1</visible>
+          <value>3</value>
+        </slide_col_resp_1024>
+
+        <autoplay_resp_1024>
+          <label>Autoplay</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>11</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </autoplay_resp_1024>
+
+        <showarrow_resp_1024>
+          <visible>1</visible>
+          <label>Show Arrow</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>20</sort_order>
+        <value>true</value>
+        </showarrow_resp_1024>
+
+        <show_dots_resp_1024>
+          <label>Show Dots indicators</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>22</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </show_dots_resp_1024>
+
+        <interval_resp_1024>
+          <visible>1</visible>
+          <label>Speed</label>
+          <comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+          <type>text</type>
+          <sort_order>30</sort_order>
+          <value>4000</value>
+        </interval_resp_1024>
+
+        <!-- Responsive 600 -->
+        <spacer_3 translate="label">
+          <label>General Setting</label>
+          <type>bumble_filter/system_config_form_field_responsive600</type>
+          <sort_order>40</sort_order>
+          <visible>1</visible>
+          <description></description>
+        </spacer_3>
+
+        <slide_by_resp_600>
+          <label>Slide By</label>
+          <type>text</type>
+          <description>Number Items will slide on a time. Default: 1</description>
+          <sort_order>50</sort_order>
+          <visible>1</visible>
+          <value>1</value>
+        </slide_by_resp_600>
+
+        <slide_col_resp_600>
+          <label>Columns show</label>
+          <type>text</type>
+          <description>Width of each slide. Set field without unit px. Default: 245px</description>
+          <sort_order>60</sort_order>
+          <visible>1</visible>
+          <value>3</value>
+        </slide_col_resp_600>
+
+        <autoplay_resp_600>
+          <label>Autoplay</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>70</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </autoplay_resp_600>
+
+        <showarrow_resp_600>
+          <visible>1</visible>
+          <label>Show Arrow</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>80</sort_order>
+        <value>true</value>
+        </showarrow_resp_600>
+
+        <show_dots_resp_600>
+          <label>Show Dots indicators</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>82</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </show_dots_resp_600>
+
+        <interval_resp_600>
+          <visible>1</visible>
+          <label>Speed</label>
+          <comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+          <type>text</type>
+          <sort_order>90</sort_order>
+          <value>4000</value>
+        </interval_resp_600>
+
+        <!-- Responsive 480 -->
+        <spacer_4 translate="label">
+          <label>General Setting</label>
+          <type>bumble_filter/system_config_form_field_responsive480</type>
+          <sort_order>100</sort_order>
+          <visible>1</visible>
+          <description></description>
+        </spacer_4>
+
+        <slide_by_resp_480>
+          <label>Slide By</label>
+          <type>text</type>
+          <description>Number Items will slide on a time. Default: 1</description>
+          <sort_order>110</sort_order>
+          <visible>1</visible>
+          <value>1</value>
+        </slide_by_resp_480>
+
+        <slide_col_resp_480>
+          <label>Columns show</label>
+          <type>text</type>
+          <description>Width of each slide. Set field without unit px. Default: 245px</description>
+          <sort_order>120</sort_order>
+          <visible>1</visible>
+          <value>3</value>
+        </slide_col_resp_480>
+
+        <autoplay_resp_480>
+          <label>Autoplay</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>130</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </autoplay_resp_480>
+
+        <showarrow_resp_480>
+          <visible>1</visible>
+          <label>Show Arrow</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>140</sort_order>
+        <value>true</value>
+        </showarrow_resp_480>
+
+        <show_dots_resp_480>
+          <label>Show Dots indicators</label>
+          <type>select</type>
+            <values>
+              <yes translate="label">
+                <label>Yes</label>
+                <value>true</value>
+            </yes>
+            <no translate="label">
+                <label>No</label>
+                <value>false</value>
+            </no>
+        </values>
+        <sort_order>149</sort_order>
+        <visible>1</visible>
+        <value>true</value>
+        </show_dots_resp_480>
+
+        <interval_resp_480>
+          <visible>1</visible>
+          <label>Speed</label>
+          <comment>Determines the duration of the transition in milliseconds. Default will be 4000 milliseconds</comment>
+          <type>text</type>
+          <sort_order>150</sort_order>
+          <value>4000</value>
+        </interval_resp_480>
+    
+</parameters>
+</widget_filter_scroll>            
+          
+</widgets>

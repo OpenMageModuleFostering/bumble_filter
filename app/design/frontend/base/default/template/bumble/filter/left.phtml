@@ -1,0 +1,177 @@
+
+<?php
+
+$url= $_SERVER['HTTP_HOST'];
+
+$id = $_GET['p'];
+$category = $_GET['category'];
+$labelPrice= $_GET['labelPrice'];
+$price= $_GET['price'];
+$route =strtok($_SERVER["REQUEST_URI"],'?');
+
+
+
+?>
+
+
+
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Shop By') ?></span></strong>
+        <?php echo $url2; ?>
+    </div>
+
+
+    <div class="remove-filter">
+    <ul>
+    <?php
+    if ($category != "" || $price != "")
+    {  
+          
+        if($category != ""){
+            ?>
+            <div>
+            <p style="float:left;">Category</p><a style="margin-left: 20px;" href="http://<?php echo $url; ?><?php echo $route; ?><?php if($price != ""){ echo '?labelPrice=price&price='.$price;} ?>"><button> X</button></a>
+            </div>
+            <?php }
+        if($price != ""){
+            ?>
+            <div>
+            <p style="float:left;">Price<?php echo ' '. $price; ?></p><a style="margin-left: 20px;" href="http://<?php echo $url; ?><?php echo $route; ?><?php if($category != ""){ echo '?category='.$category; }?>"><button> X</button></a>
+            </div>
+
+        
+
+    <?php 
+                }   
+    }
+
+    ?>
+    </ul>
+    </div>
+
+
+    <div class="block-content">
+        
+    
+    <div class="item-category">
+    <h3 style="background-color: #ddd; padding: 4px; margin-bottom: 0px;">Category</h3>
+    <ul style="border:1px solid #ddd;padding-bottom: 10px;">
+<?php
+
+    $products= Mage::getModel('catalog/product')->getCollection();
+    $option= array();
+
+    $i = 0;
+    $att = array();
+
+    foreach($products as $product)
+    {
+    
+    $prod=Mage::getModel('catalog/product')->load($product->getId());
+    $categoria=$prod->getCategoryIds();
+    $_cat=Mage::getModel('catalog/category')->load($categoria[0]);
+
+    $att[$i]= $_cat;
+    $i++;
+
+    
+    }
+    
+    
+    foreach ($att as $key) {
+            
+            $option[]= array('value' => $key->getId(),
+                            'label'=> $key->getName() );
+        }  
+
+        
+        $length=0;
+    foreach($option as $o){
+    $length++;
+    }
+
+  
+    for($i=0;$i<$length;$i++){
+        for($j=$i+1;$j<$length;$j++){
+        if($option[$i]['value']==$option[$j]['value']){
+            unset($option[$i]);
+
+        }
+     }
+    }
+     sort($option);
+
+    foreach ($option as $optCat) {
+        ?>
+
+
+    <li style="margin-left: 15px;">
+            <a href="http://<?php echo $url; ?><?php echo $route; ?>?category=<?php echo $optCat['value']; ?><?php if($price != ""){ echo '&labelPrice=price&price='.$price;} ?>"><?php echo $optCat['label']; ?></a>
+        </li>
+    
+<?php    }
+
+?>
+
+    </ul>
+    </div><!-- first filter -->
+
+    
+<div class="item-category">
+    <h3 style="background-color: #ddd; padding: 4px; margin-bottom: 0px;">Price</h3>
+    <ul style="border:1px solid #ddd;padding-bottom: 10px;">
+<?php
+    $products= Mage::getModel('catalog/product')->getCollection();
+     $option = array();
+
+        $i = 0;
+        $att = array();
+
+        foreach($products as $product) 
+        {
+            $prod= Mage::getSingleton('catalog/product')->load($product->getId());
+            $at= Mage::helper('core')->currency($prod->getPrice(),true,false);
+            $att[$i]= $at;
+            $i++;
+        }
+        
+        $result = array_unique($att);
+
+        foreach ($result as $key) 
+        {
+            
+           $option[] = array( 'value' => $key, 
+                               'label' => $key );
+        
+        }
+        sort($option);
+        foreach ($option as $optPrice){
+
+            $pri = $optPrice['value'];
+            $pric= str_replace(' €', '', $pri);
+            ?>
+
+
+    <li style="margin-left: 15px;">
+            <a href="http://<?php echo $url; ?><?php echo $route; ?>?labelPrice=price&price=<?php echo $pric.'00'; ?><?php if($category != ""){ echo '&category='.$category; }?>"><?php echo $optPrice['label']; ?></a>
+        </li>
+    
+<?php    }
+
+?>
+
+    </ul>
+    </div><!-- second filter  -->
+    
+         
+
+
+    </div><!--  fine blocco content -->
+</div>
+
+
+
+
+ 
+        

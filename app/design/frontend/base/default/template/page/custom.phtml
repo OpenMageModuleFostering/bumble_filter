@@ -1,0 +1,380 @@
+<?php
+    
+
+
+     if($pricelt == "" || $pricegt == "")
+     {
+        $product = Mage::getModel('catalog/product');
+        $attributes = Mage::getResourceModel('eav/entity_attribute_collection')
+        ->setEntityTypeFilter($product->getResource()->getTypeId())
+                ->addFieldToFilter('attribute_code', 'manufacturer'); //can be changed to any attribute
+        $attribute = $attributes->getFirstItem()->setEntity($product->getResource());
+        $manufacturers = $attribute->getSource()->getAllOptions(false);
+   
+        $filter = Mage::registry('current_group');
+        $filter_id= $filter->getFilterId();
+        $allmanu = Mage::getModel('bumble_filter/filter')->load($filter_id);
+        $all = $allmanu->getManufacturer();
+        $use = $allmanu->getUsemanufacturer();
+        $getLabel= $filter->getTabs();
+        if($getLabel == "")
+        {
+            $filtertype = $all;
+        }
+        else{
+        foreach ($manufacturers as $manufacturer){
+                    if($getLabel == $manufacturer['label'])
+                    {
+                   $filtertype= $manufacturer['value'] ;
+                    }
+                }
+            }
+    //filter for min and max price
+    $productColh = Mage::getModel('catalog/product')->getCollection();
+    if($use == 1){
+            
+          $productColh->addFieldToFilter(array(
+                                    array('attribute'=>'manufacturer','eq'=>$filtertype),
+                                    
+                    ));
+    }
+    $productColh->addAttributeToSort('price', 'desc')//max
+    ->setPageSize(1)
+    ->load(); 
+
+    $productColg = Mage::getModel('catalog/product')->getCollection();
+    if($use == 1){
+            
+          $productColg->addFieldToFilter(array(
+                                    array('attribute'=>'manufacturer','eq'=>$filtertype),
+                                    
+                    ));
+    }
+    $productColg->addAttributeToSort('price', 'asc')//min
+    ->setPageSize(1)
+    ->load();
+
+    $productExt = Mage::getModel('catalog/product')->getCollection();
+    if($use == 1){
+            
+          $productExt->addFieldToFilter(array(
+                                    array('attribute'=>'manufacturer','eq'=>$filtertype),
+                                    
+                    ));
+          $productExt->addAttributeToFilter('price', array('gt' => $gt_price));
+          $productExt->addAttributeToFilter('price', array('lt' => $lt_price));
+    }#$gt_price &pricelt= $lt_price
+    $productExt->load();
+
+    $countExt = count($productExt);
+
+
+$max_price = $productColh->getFirstItem()->getPrice();
+$max_price = str_replace('.0000', '', $max_price);
+$min_price = $productColg->getFirstItem()->getPrice();
+$min_price = str_replace('.0000', '', $min_price);
+//var_dump($max_price);
+if($max_price > 100){ $split = 4;}
+if($max_price <= 100){ $split = 2;}
+
+$med_price = $max_price / $split;
+$med_price = floor($med_price);
+$diff= $max_price /3; 
+$diff= floor($diff);
+$lt_price = $min_price + $diff;
+$lt_price = floor($lt_price);
+$bet_price = $med_price + $med_price;
+$gt_price = $max_price - $diff ;
+$gt_price = floor($gt_price);
+if($split == 2)
+{$l_lt_price = $lt_price - 1; $g_lt_price = $gt_price - 1; $gt_price = $min_price + $diff; $lt_price= $max_price - $diff;}
+else
+{$l_lt_price = $lt_price - 1; $g_lt_price = $gt_price - 1;}
+$lab_lt_price = $l_lt_price .',99';
+
+$lab_gt_price = $g_lt_price .',99';
+ }
+
+ /***********************  Category Option   *******************************/
+ 
+   $filter = $coll;
+        
+      $ob = new Bumble_Filter_Block_Filter_Productlist;
+
+      $pr= $ob->_getProductCollection();      
+
+    $option= array();
+    $i = 0;
+    $att = array();
+
+    foreach($pr as $product) {
+    
+    $categoria=$product->getCategoryIds();
+  
+    $_cat=Mage::getModel('catalog/category')->load($categoria[0]);
+   
+    $att[$i]= $_cat;
+    $i++;
+    
+    
+    }
+
+    ?>
+
+    <?php foreach ($att as $key) : ?>
+            <?php
+
+            //$count = $key->getProductCount();
+
+            $option[]= array('value' => $key->getId(),
+                            'label'=> $key->getName() );
+                            ?>
+    <?php endforeach ?>
+
+    <?php $length=0; ?>
+    <?php foreach($option as $o): ?>
+    <?php $length++; ?>
+    <?php endforeach ?>
+
+    <?php for($i=0;$i<$length;$i++) : ?>  
+    <?php for($j=$i+1;$j<$length;$j++) : ?>
+    <?php if($option[$i]['value']==$option[$j]['value']): ?>
+    <?php unset($option[$i]); ?>
+
+    <?php endif ?>
+    <?php endfor ?>
+    <?php endfor ?>
+    
+    <?php sort($option); ?>
+   <?php /***************************End Category option************************/ ?> 
+   <?php $lunghezzaArray= count($option); ?>
+
+
+<?php
+
+$url= $_SERVER['HTTP_HOST'];
+
+$route =strtok($_SERVER["REQUEST_URI"],'?');
+$cat= Mage::registry('current_group')->getFilterId();
+    $coll = Mage::getModel('bumble_filter/filter')->load($cat);
+    $_cat= $coll->getCategory();
+
+
+if($_cat)
+{
+    $category = $_cat;
+}else{
+    $category = $_GET['category'];
+}
+
+ $pricelt = $_GET['pricelt'];
+ $pricegt = $_GET['pricegt'];
+
+
+?>
+
+
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Shop By') ?></span></strong>
+    </div>
+
+<div class="block-content">
+      <!-- Categorie  -->      
+    <?php if($category != "") : ?>
+        <?php if($pricelt != null && $pricegt == null): ?>
+        <?php $pricelt= '?pricelt='.$pricelt; ?>
+        <?php endif ?>
+         <?php if($pricegt != null && $pricelt == null): ?>
+        <?php $pricegt= '?pricegt='.$pricegt; ?>
+        <?php endif ?>
+        <?php if($pricelt != null && $pricegt != null): ?>
+        <?php $pricelt= '?pricelt='.$pricelt; ?>
+        <?php $pricegt= '&pricegt='.$pricegt; ?>
+        <?php endif ?>
+
+            <div class="currently">
+
+
+            <a class="btn-remove" href="http://<?php echo $url; ?><?php echo $route; ?><?php echo $pricelt; ?><?php echo $pricegt; ?>" <?php if($lunghezzaArray == 1) { ?> title="Non hai altre categorie associate con i filtri impostati per questo articolo" <?php }else{ ?> title="Rimuovi questo articolo" <?php } ?>><i class="fa fa-times"></i></a>
+            <span class="value" style="font-size: 1.2em">Categoria:</span> <span class="value"><?php echo ' '.' '; ?><?php echo Mage::getModel('catalog/category')->load($category)->getName(); ?></span>
+            
+            </div>       
+
+    <?php endif ?>
+    <!-- Prezzo  -->
+    <?php if($pricelt != "" || $pricegt != "" ) : ?>
+        <?php if($category != null): ?>
+        <?php $caturl= '?category='.$category; ?>
+        <?php endif ?>
+        <?php if($category == null) :?>
+        <?php $caturl= '' ?>
+        <?php endif ?>
+        <?php
+            $pricelt= $_GET['pricelt'];
+            $pricegt= $_GET['pricegt'];
+        ?>
+
+    <?php if($pricelt <= $lt_price && $pricegt == "") : ?>
+        <?php $label = '0,00 € - '.$lab_lt_price.' €' ?>
+    <?php endif ?>
+    
+    <?php if( ($pricelt == $gt_price && $pricegt == $lt_price) || $pricegt == $lt_price || ($pricelt == $lt_price && $pricegt == $gt_price) ) : ?>
+        <?php $label = $lab_lt_price.' € - '.$lab_gt_price.' €' ?>
+    <?php endif ?>
+
+    <?php if($pricegt >= $gt_price && $pricelt == "") : ?>
+        <?php $label = 'Oltre '.$lab_gt_price.' €' ?>
+    <?php endif ?>
+        
+
+            <div class="currently">
+
+
+            <a class="btn-remove" href="http://<?php echo $url; ?><?php echo $route; ?><?php echo $caturl; ?>" title="Rimuovi questo articolo"><i class="fa fa-times"></i></a>
+            <span class="value" style="font-size: 1.2em">Prezzo:</span><?php echo ' '.' '.$label; ?><span class="value"></span>
+            
+            </div>       
+
+    <?php endif ?>
+
+    <?php if(($pricelt != null && $category != null) || ($pricegt != null && $category != null) || ($pricegt != null && $pricelt != null && $category != null)) : ?>
+        <div class="actions">
+                <a href="http://<?php echo $url; ?><?php echo $route; ?>">Rimuovi tutto</a>
+            </div> 
+    <?php endif ?>
+    
+    <dl id="narrow-by-list">
+    <?php if($category == null) : ?>
+    <dt class="last odd">Categorie</dt>
+        <dd class="last odd">
+            <ol>
+
+
+    <?php foreach ($option as $optCat) : ?>
+    <?php if ($lunghezzaArray == 1){ $cat = ''; $title = $optCat['label'].' é l\'unica categoria presente'; }else{ $cat = "?category=".$optCat['value']; $title = $optCat['label']; } ?>
+    <?php
+    if( $pricelt != null && $pricegt != null && $cat != "" )
+        {$set_price = '&pricegt='.$pricegt.'&pricelt='.$pricelt; }
+    if( $pricelt != null && $pricegt != null && $cat == "" )
+        {$set_price = '?pricegt='.$pricegt.'&pricelt='.$pricelt;}
+    if($pricegt == null && $pricelt != null && $cat != "")
+        {$set_price = '&pricelt='.$pricelt; }
+    if($pricegt == null && $pricelt != null && $cat == "")
+        {$set_price = '?pricelt='.$pricelt;} 
+    if( $pricelt == null && $pricegt != null && $cat != "" )
+        {$set_price = '&pricegt='.$pricegt; }
+    if( $pricelt == null && $pricegt != null && $cat == "" )
+        {$set_price = '?pricegt='.$pricegt;}
+
+    ?>
+    
+    <li>
+        <a href="http://<?php echo $url; ?><?php echo $route; ?><?php echo $cat; ?><?php echo $set_price; ?>" title="<?php echo $title; ?>"><span><?php echo $optCat['label']; ?></span></a>
+    </li>
+   
+    <?php  endforeach ?>
+    
+    
+    </ol>
+    </dd><!-- fine primo filter  -->
+<?php endif ?><!--  fine category filter -->
+
+<?php if($pricelt == null && $pricegt == null ) : ?>
+    <dt class="last odd">Prezzo</dt>
+        <dd class="last odd">
+            <ol>
+
+<?php if($pricegt == "" && $pricelt == ""): ?>
+<?php if($max_price <= $l_lt_price && $min_price <= $l_lt_price) : ?>
+    <?php 
+        if($category != null){$cat= '&category='.$category; }else {$cat = '';}
+        $head = 'http://'.$url.$route.'?pricelt='.$lt_price.$cat;
+        header('Location: '.$head);
+        die();
+    ?>
+<?php endif ?>
+<?php endif ?>
+<?php if($pricegt == "" && $pricelt == ""): ?>
+<?php if(($max_price > $l_lt_price && $max_price <= $g_lt_price) && ($min_price > $l_lt_price && $min_price <= $g_lt_price)) : ?>
+    <?php 
+        if($category != null){$cat= '&category='.$category; }else {$cat = '';}
+        $head = 'http://'.$url.$route.'?pricegt='.$lt_price.'&pricelt='.$gt_price.$cat;
+        header('Location: '.$head);
+        die();
+    ?>
+<?php endif ?>
+<?php endif ?>
+<?php if($pricegt == "" && $pricelt == ""): ?>
+<?php if($max_price > $g_lt_price && $min_price > $g_lt_price) : ?>
+    <?php 
+        if($category != null){$cat= '&category='.$category; }else {$cat = '';}
+        $head = 'http://'.$url.$route.'?pricegt='.$gt_price.$cat;
+        header('Location: '.$head);
+        die();
+    ?>
+<?php endif ?>
+<?php endif ?>
+<?php /*if($lunghezzaArray == 1) : ?>
+    <?php 
+        if($pricegt != null && $pricelt != null ){
+            $pri= '?pricegt='.$lt_price.'&pricelt='.$gt_price; 
+            $head = 'http://'.$url.$route.$pri.'&category='.$optCat["value"];
+        }else{
+            $head = 'http://'.$url.$route.'?category='.$optCat["value"];
+        }
+
+        if($pricelt != null && $pricegt == null){
+
+            $pri= '?pricelt='.$pricelt; 
+            $head = 'http://'.$url.$route.$pri.'&category='.$optCat["value"];
+        }else{
+            $head = 'http://'.$url.$route.'?category='.$optCat["value"];
+        }
+        if($pricegt != null && $pricelt == null){
+            $pri= '?pricegt='.$pricegt; 
+            $head = 'http://'.$url.$route.$pri.'&category='.$optCat["value"];
+        }else{
+            $head = 'http://'.$url.$route.'?category='.$optCat["value"];
+        }
+        
+        header('Location: '.$head);
+        die();
+    ?>
+<?php endif */?>
+<!-- filtri  -->
+<?php if($max_price <= $l_lt_price || $min_price <= $l_lt_price) : ?>
+<li>
+        <a href="http://<?php echo $url; ?><?php echo $route; ?>?pricelt=<?php echo $gt_price ?><?php if($category != null){echo '&category='.$category; } ?>"><span>0,00 € - <?php echo $lab_lt_price ?> €</span></a>
+    </li>
+<?php endif ?>
+<?php if( ($max_price > $l_lt_price && $max_price <= $g_lt_price) || ($max_price > $l_lt_price && $max_price >= $g_lt_price) ) : ?>
+    <?php
+        if($countExt > 1) :
+    ?>
+<li>
+        <a href="http://<?php echo $url; ?><?php echo $route; ?>?pricegt=<?php echo $gt_price ?>&pricelt=<?php echo $lt_price ?><?php if($category != null){echo '&category='.$category; } ?>"><span><?php echo $lab_lt_price ?> € - <?php echo $lab_gt_price ?> €</span></a>
+    </li>
+    <?php endif ?>
+<?php endif ?>
+<?php if($max_price > $g_lt_price) : ?>
+<li>
+        <a href="http://<?php echo $url; ?><?php echo $route; ?>?pricegt=<?php echo $lt_price ?><?php if($category != null){echo '&category='.$category; } ?>"><span>Oltre <?php echo $lab_gt_price ?> €</span></a>
+    </li>
+<?php endif ?>
+            </ol>
+        </dd><!-- fine second filter  -->
+    <?php endif ?><!--  fine if second filter -->
+    </dl>
+
+    
+    
+   </div><!--  fine blocco content -->
+   <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+</div>
+
+
+
+
+ 
+        

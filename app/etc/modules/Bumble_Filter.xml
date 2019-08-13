@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Bumble_Filter>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Bumble_Filter>
+    </modules>
+</config>

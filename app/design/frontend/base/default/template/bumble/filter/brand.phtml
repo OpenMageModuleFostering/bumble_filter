@@ -1,0 +1,60 @@
+<?php   
+/*------------------------------------------------------------------------
+  * Bumble Extension Module 
+  * @package             SocialConnect
+  * @author              Lanzillo Ferdinando, Sabatino Francesco
+  * @copyright           Copyright (C) 2016 http://www.armah.it/armah-extension-en/ All Rights Reserved.
+  * @license             http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+  * @Technical-Support   http://www.armah.it/armah-extension-en/
+---------------------------------------------------------------------------*/
+?>
+<?php
+$c = Mage::getStoreConfig( 'bumble_filter/general_setting/prod_imagesize' );
+if (strpos($c, 'x') !== false) {
+    
+    $tmp = explode( "x", $c );
+            
+  $width = (int)$tmp[0];
+  $height = (int)$tmp[1];
+
+  if($width == 0 )
+  {
+    $width= '100%';
+  }
+  
+  if($height == 0)
+  {
+    $height= '';
+  }
+}
+else
+{
+  $width= '';
+  $height= '';
+}
+?>
+<?php $url= $_SERVER['HTTP_HOST']; ?>
+<div class="bumble-filter-page">
+
+<div class="bumble-pres">
+
+  <h1><?php echo $this->__( "%s",  $this->getFilter()->getTitle() ); ?></h1>
+
+  <?php if( $this->getFilter()->getDescription() ) : ?>
+  <div class="filter-description">
+    <?php echo $this->getFilter()->getDescription();?>
+  </div>
+  <?php endif; ?> 
+
+  <?php if( $this->getFilter()->getFile() ) :?>
+  <div class="filter-image">
+    <img src="http://<?php echo $url; ?>/media/<?php echo $this->getFilter()->getFile();?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" title="<?php echo $this->getFilter()->getTitle();?>" />
+  </div>
+  <?php endif; ?>
+</div>
+
+
+</div>
+<div class="filter-product bumbleclear" >
+<?php echo $this->getChildHtml('products') ?>
+</div>
