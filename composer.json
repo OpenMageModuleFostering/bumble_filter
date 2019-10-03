@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Bumble_Filter",
+    "name": "OpenMageModuleFostering\/Bumble_Filter",
     "type": "magento-module",
     "license": "OSL-v3.0",
     "homepage": "",
     "description": "Create separete pages with custom filter of your products, where you can filter by Manufacturer, Category, for every attributes of your products or all of them.",
     "authors": [
-    {
-        "name": "Ferdinando Lanzillo",
-        "email": "flanzillo05@gmail.com"
-    }
-],
+        {
+            "name": "Ferdinando Lanzillo",
+            "email": "flanzillo05@gmail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
